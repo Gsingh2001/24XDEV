@@ -1,3 +1,5 @@
+const { Base_Url } = require("../js/utils");
+
 jQuery(document).ready(function($) {
   "use strict";
 
@@ -63,7 +65,7 @@ jQuery(document).ready(function($) {
 
     // Serialize the form data to send it as POST payload
     var formData = $(this).serialize();
-    var action = '/contactform'; // Default action if not provided
+    var action = `${Base_Url}/contactform`; 
 
     // Make a POST request to the /contactform API
     $.ajax({
