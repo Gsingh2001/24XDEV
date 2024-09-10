@@ -65,7 +65,7 @@ jQuery(document).ready(function($) {
 
     // Serialize the form data to send it as POST payload
     var formData = $(this).serialize();
-    var action = `${Base_Url}/contactform`; 
+    var action = `${Base_Url}/submit-form`; 
 
     // Make a POST request to the /contactform API
     $.ajax({
