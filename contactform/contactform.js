@@ -1,4 +1,4 @@
-const { Base_Url } = require("../js/utils");
+const { Base_Url } = require("../frontend/js/utils");
 
 jQuery(document).ready(function($) {
   "use strict";
