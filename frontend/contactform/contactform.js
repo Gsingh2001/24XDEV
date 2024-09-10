@@ -1,25 +1,25 @@
 jQuery(document).ready(function($) {
   "use strict";
 
-  //Contact
-  $('form.contactForm').submit(function() {
+  // Contact Form Submission
+  $('form.contactForm').submit(function(e) {
+    e.preventDefault(); // Prevent the default form submission behavior
+
     var f = $(this).find('.form-group'),
       ferror = false,
       emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
 
-    f.children('input').each(function() { // run all inputs
-
-      var i = $(this); // current input
+    // Validate input and textarea fields
+    f.children('input, textarea').each(function() {
+      var i = $(this); // Current input/textarea
       var rule = i.attr('data-rule');
 
       if (rule !== undefined) {
-        var ierror = false; // error flag for current input
+        var ierror = false; // Error flag for current input
         var pos = rule.indexOf(':', 0);
         if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
+          var exp = rule.substr(pos + 1);
           rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
         }
 
         switch (rule) {
@@ -42,77 +42,51 @@ jQuery(document).ready(function($) {
             break;
 
           case 'checked':
-            if (! i.is(':checked')) {
+            if (!i.is(':checked')) {
               ferror = ierror = true;
             }
             break;
 
           case 'regexp':
-            exp = new RegExp(exp);
-            if (!exp.test(i.val())) {
+            var regex = new RegExp(exp);
+            if (!regex.test(i.val())) {
               ferror = ierror = true;
             }
             break;
         }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
+        i.next('.validation').html(ierror ? (i.attr('data-msg') || 'Invalid Input') : '').show('blind');
       }
     });
-    f.children('textarea').each(function() { // run all inputs
 
-      var i = $(this); // current input
-      var rule = i.attr('data-rule');
-
-      if (rule !== undefined) {
-        var ierror = false; // error flag for current input
-        var pos = rule.indexOf(':', 0);
-        if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
-          rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
-        }
-
-        switch (rule) {
-          case 'required':
-            if (i.val() === '') {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'minlen':
-            if (i.val().length < parseInt(exp)) {
-              ferror = ierror = true;
-            }
-            break;
-        }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-      }
-    });
+    // If there are validation errors, stop the form submission
     if (ferror) return false;
-    else var str = $(this).serialize();
-    var action = $(this).attr('action');
-    if( ! action ) {
-      action = 'contactform/contactform.php';
-    }
+
+    // Serialize the form data to send it as POST payload
+    var formData = $(this).serialize();
+    var action = '/contactform'; // Default action if not provided
+
+    // Make a POST request to the /contactform API
     $.ajax({
       type: "POST",
       url: action,
-      data: str,
-      success: function(msg) {
-        // alert(msg);
-        if (msg == 'OK') {
+      data: formData,
+      success: function(response) {
+        if (response == 'OK') {
           $("#sendmessage").addClass("show");
           $("#errormessage").removeClass("show");
-          $('.contactForm').find("input, textarea").val("");
+          $('.contactForm').find("input, textarea").val(""); // Clear form fields on success
         } else {
           $("#sendmessage").removeClass("show");
           $("#errormessage").addClass("show");
-          $('#errormessage').html(msg);
+          $('#errormessage').html(response); // Display error message
         }
-
+      },
+      error: function() {
+        $("#errormessage").addClass("show");
+        $('#errormessage').html("There was an error sending the message."); // Display error if the API request fails
       }
     });
+
     return false;
   });
-
 });
