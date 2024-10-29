@@ -1,7 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Footer from '../../24xdev-1/src/component/Footer';
-import NavBar from '../../24xdev-1/src/component/NavBar';
 import { ThemeProvider } from './assets/ThemeContext';
 import HomePage from './pages/HomePage';
 import Loader from './component/Loader';
@@ -13,6 +11,8 @@ import Step2 from './component/forms/step2';
 import Step3 from './component/forms/step3';
 import Step4 from './component/forms/step4';
 import Step5 from './component/forms/step5';
+import Footer from './component/Footer';
+import Navbar from './component/NavBar';
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
             </div>
           ) : (
             <>
-              <NavBar />
+              <Navbar />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/gettingstarted" element={<GettingStarted />} >
