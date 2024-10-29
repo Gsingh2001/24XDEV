@@ -20,7 +20,7 @@ const CallToAction = () => {
           </div>
           <div className="lg:w-3/12 text-center">
             <Link
-              to="/getting-started"
+              to="/gettingstarted"
               className={`inline-block ${isDarkMode ? 'bg-blue-500' : 'bg-blue-600'} text-white py-2 px-4 rounded hover:${isDarkMode ? 'bg-blue-600' : 'bg-blue-700'} transition duration-300`}
             >
               Get Started Now

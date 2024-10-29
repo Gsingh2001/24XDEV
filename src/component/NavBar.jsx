@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-scroll'; // Import Link from react-scroll
 import { useTheme } from '../assets/ThemeContext';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,7 +43,9 @@ const Navbar = () => {
 
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
+              <NavLink to="/">
               <img className="h-32 w-auto" src="/img/main-logo.png" alt="24xdev.uk" />
+              </NavLink>
             </div>
           </div>
 

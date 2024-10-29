@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../assets/ThemeContext';
+import { Link } from 'react-router-dom';
 
 const IntroSection = () => {
   const { isDarkMode } = useTheme(); // Get the dark mode state
@@ -19,12 +20,12 @@ const IntroSection = () => {
           <p className={`text-lg mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Discover how we can help you achieve your goals with cutting-edge technology and expert design.
           </p>
-          <a
-            href="#about"
+          <Link
+            to="/gettingstarted"
             className="bg-blue-500 text-white py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105"
           >
             Get Started
-          </a>
+          </Link>
         </div>
 
         <div className="md:w-1/2 order-first md:order-last flex justify-center">

@@ -1,36 +1,38 @@
-// Step5.jsx
 import React from 'react';
-import { useUserContext } from '../../assets/UserContext';
+import { useTheme } from '../../assets/ThemeContext';
 
 const Step5 = () => {
-  const { userData } = useUserContext();
-
-  const handleSubmit = () => {
-    // Submit the data to your API here
-    console.log('Submitting:', userData);
-    alert('Data submitted successfully!');
-  };
+  const { isDarkMode } = useTheme(); // Access dark mode state
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Step 5: Review & Submit</h2>
-      <div className="mb-4">
-        <h3 className="font-semibold">Services:</h3>
-        <p>{userData.services.join(', ')}</p>
-      </div>
-      <div className="mb-4">
-        <h3 className="font-semibold">Additional Information:</h3>
-        <p>{userData.additionalInfo}</p>
-      </div>
-      <div className="mb-4">
-        <h3 className="font-semibold">Preferences:</h3>
-        <p>{userData.preferences}</p>
-      </div>
-      <div className="mb-4">
-        <h3 className="font-semibold">Contact Details:</h3>
-        <p>{userData.contactDetails}</p>
-      </div>
-      <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+    <div className={`p-6 rounded-lg ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+      <h2 className={`text-2xl font-bold mb-4 text-center ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
+        Thank You!
+      </h2>
+      <p className={`mb-4 text-center ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+        We appreciate your interest in our services. One of our team members will contact you shortly.
+      </p>
+      <p className={`mb-4 text-center ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+        For any inquiries, feel free to reach out to us at: <strong>gsingh07@outlook.in</strong>
+      </p>
+      <h3 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+        Why Choose Us?
+      </h3>
+      <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>
+        At our company, we are committed to providing the best service to our clients. Our privacy policy ensures that your information is kept confidential, and we promise the best prices in the market.
+      </p>
+      <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
+        With our affordable timekeeping services, you can focus on what matters most—growing your business. We strive to deliver timely, professional, and reliable service tailored to your needs.
+      </p>
+      <h3 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+        Our Commitment
+      </h3>
+      <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>
+        We guarantee that you will receive exceptional support and quality services. Your satisfaction is our top priority.
+      </p>
+      <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
+        Thank you once again for choosing us. We look forward to working with you!
+      </p>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../assets/ThemeContext'; // Import your theme context
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const { isDarkMode } = useTheme(); // Get the dark mode state
@@ -55,11 +56,11 @@ const FooterLinks = () => (
   <div>
     <h4 className="font-semibold">Useful Links</h4>
     <ul className="list-disc pl-5">
-      <li><a href="#" className="hover:underline">Home</a></li>
-      <li><a href="#" className="hover:underline">About Us</a></li>
-      <li><a href="#" className="hover:underline">Services</a></li>
-      <li><a href="#" className="hover:underline">Terms of Service</a></li>
-      <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+      <li><Link to="#" className="hover:underline">Home</Link></li>
+      <li><Link to="#" className="hover:underline">About Us</Link></li>
+      <li><Link to="#" className="hover:underline">Services</Link></li>
+      <li><Link to="/terms" className="hover:underline">Terms of Service</Link></li>
+      <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
     </ul>
     <h4 className="font-semibold mt-4">Contact Us</h4>
     <p>
@@ -75,10 +76,10 @@ const FooterLinks = () => (
 
 const SocialLinks = () => (
   <div className="flex space-x-4 mt-4">
-    <a href="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-twitter"></i></a>
-    <a href="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-facebook"></i></a>
-    <a href="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-instagram"></i></a>
-    <a href="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-linkedin"></i></a>
+    <Link to="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-twitter"></i></Link>
+    <Link to="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-facebook"></i></Link>
+    <Link to="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-instagram"></i></Link>
+    <Link to="#" className="text-gray-400 hover:text-blue-500"><i className="fa fa-linkedin"></i></Link>
   </div>
 );
 

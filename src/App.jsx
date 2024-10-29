@@ -4,15 +4,12 @@ import { ThemeProvider } from './assets/ThemeContext';
 import HomePage from './pages/HomePage';
 import Loader from './component/Loader';
 import { useState, useEffect } from 'react';
-import Step1 from './component/forms/step1';
 import { UserProvider } from './assets/UserContext';
 import GettingStarted from './pages/GettingStarted';
-import Step2 from './component/forms/step2';
-import Step3 from './component/forms/step3';
-import Step4 from './component/forms/step4';
-import Step5 from './component/forms/step5';
 import Footer from './component/Footer';
 import Navbar from './component/NavBar';
+import TermsOfService from './component/TermsOfService';
+import PrivacyPolicy from './component/PrivacyPolicy';
 
 
 function App() {
@@ -40,13 +37,10 @@ function App() {
               <Navbar />
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/gettingstarted" element={<GettingStarted />} >
-                <Route path="1" element={<Step1 />} />
-                <Route path="2" element={<Step2 />} />
-                <Route path="3" element={<Step3 />} />
-                <Route path="4" element={<Step4 />} />
-                <Route path="5" element={<Step5 />} />
-                
+         
                 </Route>
               </Routes>
               
