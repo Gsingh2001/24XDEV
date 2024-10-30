@@ -34,16 +34,7 @@ const MultiStepForm = () => {
           isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
         } transition duration-300`}
       >
-        {/* Toggle Button */}
-        <button
-          onClick={toggleDarkMode}
-          className={`absolute top-4 right-4 px-4 py-2 rounded ${
-            isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-800'
-          }`}
-        >
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
-
+       
         {/* Step Dots */}
         {step < 4 && ( // Only show dots for the first four steps
           <div className="flex justify-center mb-4">

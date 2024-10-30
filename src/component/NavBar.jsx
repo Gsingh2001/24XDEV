@@ -8,7 +8,7 @@ const Navbar = () => {
   const { isDarkMode, toggleDarkMode } = useTheme(); // Use the ThemeContext
 
   const navSections = [
-    { name: 'Home', to: 'intro' },
+    { name: 'Home', to: '/' },
     { name: 'About Us', to: 'about-us' },
     { name: 'Services', to: 'services' },
     { name: 'Portfolio', to: 'portfolio' },
