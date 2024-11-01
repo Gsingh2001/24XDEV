@@ -26,7 +26,7 @@ function HomePage() {
             <Pricing />
             <FAQ />
             <Testimonials />
-            <IntroductionToCEO />
+            <IntroductionToCEO /> 
         </>
     )
 }

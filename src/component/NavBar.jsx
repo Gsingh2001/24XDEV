@@ -86,7 +86,6 @@ const Navbar = () => {
                     <div className="theme-switch__clouds"></div>
                     {/* Consider adding an icon here to indicate the theme */}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
-                      {/* Your existing SVG path */}
                     </svg>
                   </div>
                 </label>
