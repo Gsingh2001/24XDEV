@@ -1,32 +1,44 @@
 import React from 'react';
-import { useTheme } from '../assets/ThemeContext'; // Import your theme context
+import { useTheme } from '../assets/ThemeContext';
 
 const Pricing = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { isDarkMode } = useTheme();
 
   return (
-    <section id="pricing" className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} wow fadeInUp`}>
+    <section
+      id="pricing"
+      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} wow fadeInUp`}
+      aria-labelledby="pricing-heading"
+    >
       <div className="container mx-auto px-4">
+        
+        {/* Section Header */}
         <header className="text-center mb-8">
-          <h3 className="text-3xl font-bold">Pricing Plans</h3>
+          <h3 id="pricing-heading" className="text-3xl font-bold">Pricing Plans</h3>
           <p className="mt-4">
             Our flexible pricing plans are tailored to meet your needs, whether you're looking for basic web solutions or a comprehensive all-in-one package. We provide services for clients in India, the UK, and Canada.
           </p>
         </header>
 
+        {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pricingPlans.map((plan, index) => (
             <PricingCard key={index} {...plan} isDarkMode={isDarkMode} />
           ))}
         </div>
+
       </div>
     </section>
   );
 };
 
 const PricingCard = ({ price, period, title, features, isDarkMode }) => (
-  <div className="flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
-    <div className={`bg-gray-800 p-4 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
+  <div
+    className="flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
+    role="article"
+    aria-label={`${title} - ${price} per ${period}`}
+  >
+    <div className={`p-4 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
       <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <span className="currency">₹</span>
         {price}
@@ -35,12 +47,20 @@ const PricingCard = ({ price, period, title, features, isDarkMode }) => (
     </div>
     <div className={`p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
       <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h4>
+      
+      {/* Feature List */}
       <ul className={`list-disc list-inside mt-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
         {features.map((feature, index) => (
           <li key={index}>{feature}</li>
         ))}
       </ul>
-      <a href="#" className={`mt-4 inline-block px-4 py-2 rounded bg-blue-600 text-white text-center hover:bg-blue-500 ${isDarkMode ? 'hover:bg-blue-400' : ''}`}>
+
+      {/* Call to Action Button */}
+      <a
+        href="#"
+        className={`mt-4 inline-block px-4 py-2 rounded bg-blue-600 text-white text-center hover:bg-blue-500 ${isDarkMode ? 'hover:bg-blue-400' : ''}`}
+        aria-label={`Choose ${title} Plan`}
+      >
         Choose Plan
       </a>
     </div>

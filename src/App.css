@@ -171,3 +171,49 @@
   display: inline-block;
   margin: 0 16px;
 }
+/* Ensure the navbar and expandable content transition smoothly */
+.absolute {
+  position: absolute;
+}
+.inset-x-0 {
+  left: 0;
+  right: 0;
+}
+.top-16 {
+  top: 4rem; /* Adjust this value based on your navbar height */
+}
+.bg-gray-800 {
+  background-color: rgba(31, 41, 55, 0.9); /* Dark gray with some opacity */
+}
+.team-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: scale(1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.team-card:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.image-border {
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  padding: 4px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.social-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #4f46e5;
+}
+.custom-image {
+  width: 100px; /* Set the width you want */
+  height: 100px; /* Set the height you want */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}

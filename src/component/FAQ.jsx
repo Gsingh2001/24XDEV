@@ -6,14 +6,23 @@ const FAQ = () => {
   const { isDarkMode } = useTheme(); // Get the dark mode state
 
   return (
-    <section id="faq" className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
+    <section
+      id="faq"
+      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+      aria-labelledby="faq-heading"
+    >
       <div className="container mx-auto px-4">
+        
+        {/* FAQ Section Header */}
         <header className="text-center mb-8">
-          <h3 className="text-3xl font-bold">Frequently Asked Questions</h3>
-          <p>Your questions about website design, development, hosting, deployment, and more—answered!</p>
+          <h3 id="faq-heading" className="text-3xl font-bold">Frequently Asked Questions</h3>
+          <p className="mt-2">
+            Your questions about website design, development, hosting, deployment, and more—answered!
+          </p>
         </header>
 
-        <ul id="faq-list" className="wow fadeInUp">
+        {/* FAQ List */}
+        <ul className="wow fadeInUp space-y-4" role="list">
           {faqItems.map((item, index) => (
             <FAQItem key={index} {...item} isDarkMode={isDarkMode} />
           ))}
@@ -31,16 +40,29 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
   };
 
   return (
-    <li className={`mb-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-      <a 
-        className={`flex justify-between items-center py-3 cursor-pointer ${isDarkMode ? 'text-white' : 'text-gray-900'}`} 
+    <li
+      className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}
+      role="listitem"
+    >
+      {/* Question */}
+      <button
         onClick={toggleCollapse}
+        className={`flex justify-between items-center w-full py-3 text-left focus:outline-none ${
+          isDarkMode ? 'text-white' : 'text-gray-900'
+        }`}
+        aria-expanded={isOpen}
+        aria-controls={`answer-${question}`}
       >
-        <span>{question}</span>
-        {isOpen ? <AiOutlineMinus /> : <AiOutlinePlus />} {/* Use React Icons here */}
-      </a>
+        <span className="font-medium">{question}</span>
+        {isOpen ? <AiOutlineMinus /> : <AiOutlinePlus />}
+      </button>
+
+      {/* Answer */}
       {isOpen && (
-        <div className={`mt-2 p-4 ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>
+        <div
+          id={`answer-${question}`}
+          className={`mt-2 p-4 rounded-lg ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}
+        >
           <p>{answer}</p>
         </div>
       )}
@@ -48,6 +70,7 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
   );
 };
 
+// FAQ Data Array
 const faqItems = [
   {
     question: "What services are included in your all-in-one website solution?",

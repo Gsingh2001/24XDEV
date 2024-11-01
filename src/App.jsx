@@ -10,6 +10,7 @@ import Footer from './component/Footer';
 import Navbar from './component/NavBar';
 import TermsOfService from './component/TermsOfService';
 import PrivacyPolicy from './component/PrivacyPolicy';
+import AboutUsPage from './pages/AboutUsPage';
 
 
 function App() {
@@ -39,9 +40,8 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
-                <Route path="/gettingstarted" element={<GettingStarted />} >
-         
-                </Route>
+                <Route path="/gettingstarted" element={<GettingStarted />} />
+                <Route path="/About" element={<AboutUsPage />} />
               </Routes>
               
               <Footer />

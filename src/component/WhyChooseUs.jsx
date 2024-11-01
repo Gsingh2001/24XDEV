@@ -1,87 +1,87 @@
 import React from 'react';
-import { FaGem, FaObjectGroup, FaCloud, FaSync, FaBriefcase } from 'react-icons/fa';
-import { useTheme } from '../assets/ThemeContext'; // Assuming you have a ThemeContext for dark mode
+import { useTheme } from '../assets/ThemeContext';
+import {
+  AiOutlineCheckCircle,
+  AiOutlineStar,
+  AiOutlineUser,
+  AiOutlineDollar,
+  AiOutlineLike,
+  AiOutlineClockCircle,
+} from 'react-icons/ai';
+
+const reasonsData = [
+  {
+    id: 1,
+    title: "Expertise and Experience",
+    description: "Our team comprises industry experts with years of experience in web design, development, and digital solutions, ensuring top-notch service.",
+    icon: <AiOutlineCheckCircle className="text-[#ff689b] text-4xl" />,
+    bgColor: 'bg-[#fceef3]', // Light pink
+  },
+  {
+    id: 2,
+    title: "Quality Assurance",
+    description: "We prioritize quality in every project, adhering to best practices and standards to deliver high-performance websites that stand out.",
+    icon: <AiOutlineStar className="text-[#e98e06] text-4xl" />,
+    bgColor: 'bg-[#fff0da]', // Light yellow
+  },
+  {
+    id: 3,
+    title: "Client-Centric Approach",
+    description: "At 24XDEV, we value our clients’ needs and work closely with you to ensure your vision comes to life with personalized solutions.",
+    icon: <AiOutlineUser className="text-[#3fcdc7] text-4xl" />,
+    bgColor: 'bg-[#e6fdfc]', // Light teal
+  },
+  {
+    id: 4,
+    title: "Affordable Pricing",
+    description: "We offer competitive pricing without compromising on quality, providing you with the best value for your investment.",
+    icon: <AiOutlineDollar className="text-[#41cf2e] text-4xl" />,
+    bgColor: 'bg-[#eafde7]', // Light green
+  },
+  {
+    id: 5,
+    title: "Ongoing Support",
+    description: "Our relationship doesn’t end at launch. We provide ongoing support and maintenance to keep your website updated and secure.",
+    icon: <AiOutlineLike className="text-[#41cf2e] text-4xl" />,
+    bgColor: 'bg-[#e1eeff]', // Light blue
+  },
+  {
+    id: 6,
+    title: "Timely Delivery",
+    description: "We understand the importance of deadlines. Our team is committed to delivering your projects on time without compromising quality.",
+    icon: <AiOutlineClockCircle className="text-[#8660fe] text-4xl" />,
+    bgColor: 'bg-[#ecebff]', // Light purple
+  },
+];
 
 const WhyChooseUs = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
-
-  const features = [
-    {
-      icon: <FaGem />,
-      title: 'Custom Design Solutions',
-      description: 'We create tailored designs that align with your brand, ensuring your website stands out and engages your audience.',
-      color: 'text-pink-500', // Use Tailwind color classes
-    },
-    {
-      icon: <FaObjectGroup />,
-      title: 'Seamless Development',
-      description: 'Our expert development team builds robust, responsive websites that provide a smooth user experience on all devices.',
-      color: 'text-yellow-400',
-    },
-    {
-      icon: <FaCloud />,
-      title: 'Reliable Hosting & Deployment',
-      description: 'We offer secure, scalable hosting and hassle-free deployment to ensure your website runs smoothly with minimal downtime.',
-      color: 'text-blue-500',
-    },
-    {
-      icon: <FaSync />,
-      title: 'Ongoing Maintenance & Support',
-      description: 'Our maintenance services ensure your website stays up-to-date, secure, and fully operational, with constant monitoring and updates.',
-      color: 'text-green-500',
-    },
-    {
-      icon: <FaBriefcase />,
-      title: 'All-in-One Solutions',
-      description: 'From design and development to hosting, deployment, and maintenance, we provide end-to-end services that cover every aspect of your website needs.',
-      color: 'text-purple-600',
-    },
-  ];
+  const { isDarkMode } = useTheme();
 
   return (
-    <section id="why-us" className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
-      <div className="container-fluid mx-auto px-4">
-        <header className="text-center mb-8">
-          <h3 className="text-3xl font-bold">Why Choose Us?</h3>
-          <p className="mt-2 text-lg">
-            We provide comprehensive website solutions, handling everything from design to deployment and ongoing support, tailored to meet your business needs.
+    <section id="choose-us" className={`py-8 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold leading-tight sm:text-4xl xl:text-5xl">
+            Why Choose Us
+          </h2>
+          <p className={`mt-4 text-base leading-7 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} sm:mt-8`}>
+            Your trusted partner in web development solutions.
           </p>
-        </header>
+        </div>
 
-        <div className="flex flex-wrap items-stretch">
-          <div className="w-full lg:w-1/2">
-            <div className="mb-6">
-              <img src="/img/why-us.jpg" alt="Why Choose Us" className="w-full h-full object-cover rounded-lg" />
+        <div className={`grid grid-cols-1 mt-2 text-center sm:mt-16 sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 xl:mt-10`}>
+          {reasonsData.map((reason) => (
+            <div 
+              key={reason.id} 
+              className={`flex flex-col justify-center items-center md:p-8 lg:p-14 border rounded-lg shadow-lg transition-transform transform hover:scale-105 
+                          ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'}`}>
+              <div className={`w-16 h-16 rounded-full flex justify-center items-center ${reason.bgColor}`}>
+                {reason.icon}
+              </div>
+              <h3 className={`mt-12 text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{reason.title}</h3>
+              <p className={`mt-5 text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{reason.description}</p>
             </div>
-          </div>
-
-          <div className="w-full lg:w-1/2 flex flex-col">
-            <div className="mb-6">
-              <p className="mb-4">
-                At 24XDEV, we are committed to delivering high-quality, all-in-one web solutions that ensure your online presence is professional, secure, and effective. With our expertise, you can focus on growing your business while we handle the complexities of your website.
-              </p>
-              <p>
-                We pride ourselves on offering personalized services that adapt to your needs, ensuring your website is not only functional but also future-proof.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {features.map((feature, index) => (
-                <div
-                  className={`flex items-center p-4 rounded-lg border-l-4 transition-all duration-300 ${isDarkMode ? 'border-gray-600' : 'border-gray-300'}`}
-                  key={index}
-                >
-                  <div className={`text-3xl mr-4 ${feature.color}`}>
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold">{feature.title}</h4>
-                    <p className="text-sm">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

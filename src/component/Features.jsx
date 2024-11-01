@@ -1,53 +1,61 @@
 import React from 'react';
+import { BsArrowUpRightCircle } from 'react-icons/bs'; // Import the icon
 
 const Features = () => {
   return (
-    <section id="features">
-      <div className="container">
-        <div className="row feature-item">
-          <div className="col-lg-6 wow fadeInUp">
-            <img src="img/features-1.svg" className="img-fluid" alt="Feature 1" />
-          </div>
-          <div className="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
-            <h4>Complete Website Design & Development Solutions</h4>
-            <p>
-              Our team delivers creative and responsive web designs tailored to your brand's vision. We ensure seamless
-              development with cutting-edge technologies, providing user-friendly and scalable platforms that grow with
-              your business.
-            </p>
-            <p>
-              From initial concept to final launch, we build websites that captivate your audience while driving
-              results. Our holistic approach guarantees that every element of your site is optimized for performance,
-              security, and scalability.
-            </p>
+    <div className="container mx-auto px-4 py-2">
+      {/* Main Content Section */}
+      <div className="flex h-full">
+        {/* First Column with One Card (50% width) */}
+        <div className="w-1/2 flex flex-col pr-4">
+          <div 
+            className="bg-cover bg-center rounded-lg shadow-lg flex-1 flex flex-col relative"
+            style={{ backgroundImage: "url('/img/pexels-designecologist-1779487.jpg')" }}
+          >
+            <div className="bg-black bg-opacity-50 p-4 flex-1 flex flex-col justify-end">
+              <h2 className="text-2xl font-bold text-white mb-2">UX & UI Design with Development</h2>
+              <p className="text-gray-200 mb-4">
+                Our team specializes in creating intuitive and engaging user experiences that drive conversion. We merge design with development for seamless results.
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="text-white font-bold">Getting Started</span>
+                <BsArrowUpRightCircle className="text-white" size={24} />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="row feature-item mt-5 pt-5">
-          <div className="col-lg-6 wow fadeInUp order-1 order-lg-2">
-            <img src="img/features-2.svg" className="img-fluid" alt="Feature 2" />
-          </div>
-          <div className="col-lg-6 wow fadeInUp pt-4 pt-lg-0 order-2 order-lg-1">
-            <h4>Reliable Hosting, Deployment, and Maintenance</h4>
-            <p>
-              We provide secure and fast hosting solutions that ensure your website is always online and running at peak
-              performance. Our deployment process is streamlined, making sure that your website goes live without a
-              hitch.
+        {/* Second Column with Two Cards (25% width) */}
+        <div className="w-1/4 flex flex-col px-2">
+          <a href="#" className="bg-blue-100 dark:bg-blue-800 p-6 rounded-lg shadow-lg flex-1 mb-4 flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <h2 className="text-2xl font-bold mb-2 text-blue-800 dark:text-blue-200">Web Development</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
+              We build responsive and scalable web applications tailored to your business needs, ensuring optimal performance across devices.
             </p>
-            <p>
-              Post-launch, we offer comprehensive maintenance services to keep your site updated, secure, and free of
-              technical issues. Whether it's updates, troubleshooting, or performance monitoring, we’re here to support
-              your website’s ongoing success.
+            <BsArrowUpRightCircle className="self-end text-blue-800 dark:text-blue-200" size={24} />
+          </a>
+          <a href="#" className="bg-green-100 dark:bg-green-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <h2 className="text-2xl font-bold mb-2 text-green-800 dark:text-green-200">Digital Marketing</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
+              Our digital marketing strategies are designed to enhance your online presence and engage your target audience effectively.
             </p>
-            <p>
-              Trust us to manage your web presence while you focus on growing your business. We handle everything, from
-              infrastructure to regular backups, ensuring peace of mind for our clients.
+            <BsArrowUpRightCircle className="self-end text-green-800 dark:text-green-200" size={24} />
+          </a>
+        </div>
+
+        {/* Third Column with One Card (25% width) */}
+        <div className="w-1/4 flex flex-col pl-2">
+          <a href="#" className="bg-yellow-100 dark:bg-yellow-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <h2 className="text-2xl font-bold mb-2 text-yellow-800 dark:text-yellow-200">Mobile App Development</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
+              We create user-friendly mobile applications that enhance user experience and provide solutions tailored to your needs.
             </p>
-          </div>
+            <BsArrowUpRightCircle className="self-end text-yellow-800 dark:text-yellow-200" size={24} />
+          </a>
         </div>
       </div>
-    </section>
+    </div>
   );
-};
+}
 
 export default Features;

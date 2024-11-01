@@ -7,24 +7,26 @@ const Step4 = ({ onBack, onSubmit }) => {
   const { isDarkMode } = useTheme(); // Access dark mode state
 
   const handleSubmit = async () => {
-    try {
-      const response = await fetch('https://two4xdevbackend.onrender.com/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+    // try {
+    //   const response = await fetch('https://two4xdevbackend.onrender.com/send-email', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(userData),
+    //   });
 
-      if (response.ok) {
-        console.log('Data sent successfully:', userData);
-        onSubmit();  // Move ahead if the API call is successful
-      } else {
-        console.error('Failed to send data:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error sending data:', error);
-    }
+    //   if (response.ok) {
+    //     console.log('Data sent successfully:', userData);
+    //     onSubmit();  // Move ahead if the API call is successful
+    //   } else {
+    //     console.error('Failed to send data:', response.statusText);
+    //   }
+    // } catch (error) {
+    //   console.error('Error sending data:', error);
+    // }
+    console.log("++++++++++++++", userData)
+    onSubmit(); 
   };
 
   return (

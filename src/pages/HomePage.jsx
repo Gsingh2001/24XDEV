@@ -9,20 +9,24 @@ import Portfolio from '../component/Portfolio'
 import Pricing from '../component/Pricing'
 import FAQ from '../component/FAQ'
 import ContactUsModal from '../component/ContactUsModal'
+import Testimonials from '../component/Testimonials'
+import IntroductionToCEO from '../component/IntroductionToCEO'
 
 function HomePage() {
-    
+
     return (
         <>
             <IntroSection />
             <AboutSection />
-            <ServicesSection />
-            {/* <WhyChooseUs /> */}
-            <CallToAction  />
+            {/* <ServicesSection /> */}
+            <WhyChooseUs />
+            <CallToAction />
+            <Features />
             <Portfolio />
             <Pricing />
             <FAQ />
-
+            <Testimonials />
+            <IntroductionToCEO />
         </>
     )
 }
