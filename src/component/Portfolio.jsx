@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '../assets/ThemeContext'; // Import theme context
+import { motion, useAnimation } from 'framer-motion'; // Import motion and useAnimation
 
 const Portfolio = () => {
   const { isDarkMode } = useTheme(); // Get the dark mode state
+  const controls = useAnimation();
+
+  // Animation variants for entry
+  const animationVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  // Start animation on component mount
+  useEffect(() => {
+    controls.start("visible");
+  }, [controls]);
 
   return (
     <section
@@ -13,9 +26,15 @@ const Portfolio = () => {
       <div className="container mx-auto px-8">
 
         {/* Portfolio Header */}
-        <header className="text-center mb-8">
+        <motion.header
+          initial="hidden"
+          animate={controls}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          variants={animationVariants}
+          className="text-center mb-8"
+        >
           <h3 id="portfolio-heading" className="text-3xl font-bold">Our Portfolio</h3>
-        </header>
+        </motion.header>
 
         {/* Portfolio Filters */}
         <div className="mb-6">
@@ -37,12 +56,16 @@ const Portfolio = () => {
         {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {portfolioItems.map((item, index) => (
-            <div
+            <motion.div
               key={index}
               className={`portfolio-item ${item.filter} transition-transform duration-300`}
               data-wow-delay={item.delay}
               role="tabpanel"
               aria-labelledby={`portfolio-item-${index}`}
+              initial="hidden"
+              animate={controls}
+              transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }} // Delay each item incrementally
+              variants={animationVariants}
             >
               <div className="relative rounded-lg overflow-hidden shadow-md">
                 
@@ -81,7 +104,7 @@ const Portfolio = () => {
                 </div>
                 
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

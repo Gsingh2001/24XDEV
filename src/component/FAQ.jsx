@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'; // Import the icons
 import { useTheme } from '../assets/ThemeContext'; // Import your theme context
+import { motion, useAnimation } from 'framer-motion'; // Import framer-motion
 
 const FAQ = () => {
   const { isDarkMode } = useTheme(); // Get the dark mode state
@@ -22,7 +23,7 @@ const FAQ = () => {
         </header>
 
         {/* FAQ List */}
-        <ul className="wow fadeInUp space-y-4" role="list">
+        <ul className="space-y-4" role="list">
           {faqItems.map((item, index) => (
             <FAQItem key={index} {...item} isDarkMode={isDarkMode} />
           ))}
@@ -34,9 +35,15 @@ const FAQ = () => {
 
 const FAQItem = ({ question, answer, isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const controls = useAnimation(); // Animation controls for framer-motion
 
   const toggleCollapse = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      controls.start({ height: "auto", opacity: 1 }); // Expand animation
+    } else {
+      controls.start({ height: 0, opacity: 0 }); // Collapse animation
+    }
   };
 
   return (
@@ -47,9 +54,7 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
       {/* Question */}
       <button
         onClick={toggleCollapse}
-        className={`flex justify-between items-center w-full py-3 text-left focus:outline-none ${
-          isDarkMode ? 'text-white' : 'text-gray-900'
-        }`}
+        className={`flex justify-between items-center w-full py-3 text-left focus:outline-none ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
         aria-expanded={isOpen}
         aria-controls={`answer-${question}`}
       >
@@ -57,15 +62,20 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
         {isOpen ? <AiOutlineMinus /> : <AiOutlinePlus />}
       </button>
 
-      {/* Answer */}
-      {isOpen && (
-        <div
-          id={`answer-${question}`}
-          className={`mt-2 p-4 rounded-lg ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}
-        >
-          <p>{answer}</p>
-        </div>
-      )}
+      {/* Answer with animation */}
+      <motion.div
+        id={`answer-${question}`}
+        initial={{ height: 0, opacity: 0 }}
+        animate={controls}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className={`mt-2 rounded-lg ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}
+      >
+        {isOpen && (
+          <div className="p-4">
+            <p>{answer}</p>
+          </div>
+        )}
+      </motion.div>
     </li>
   );
 };

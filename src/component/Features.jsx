@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BsArrowUpRightCircle } from 'react-icons/bs'; // Import the icon
+import { motion, useAnimation } from 'framer-motion';
 
 const Features = () => {
+  const controls = useAnimation();
+
+  // Animation variants for entry
+  const animationVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+    hover: { scale: 1.05 },
+  };
+
+  // Start animation on component mount
+  useEffect(() => {
+    controls.start("visible");
+  }, [controls]);
+
   return (
     <div className="container mx-auto px-4 py-6 md:py-10">
       {/* Main Content Section */}
       <div className="flex flex-col md:flex-row h-full space-y-6 md:space-y-0 md:space-x-4">
         
         {/* First Column with One Card (50% width on large screens) */}
-        <div className="w-full md:w-1/2 flex flex-col">
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          transition={{ duration: 0.5 }}
+          whileHover="hover"
+          variants={animationVariants}
+          className="w-full md:w-1/2 flex flex-col"
+        >
           <div 
             className="bg-cover bg-center rounded-lg shadow-lg flex-1 flex flex-col relative"
             style={{ backgroundImage: "url('/img/pexels-designecologist-1779487.jpg')" }}
@@ -24,28 +46,51 @@ const Features = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Second Column with Two Cards (50% width split on large screens, stacked on smaller screens) */}
         <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col space-y-6 md:space-y-4">
-          <a href="#" className="bg-blue-100 dark:bg-blue-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300">
+          <motion.a
+            href="#"
+            initial="hidden"
+            animate={controls}
+            transition={{ duration: 0.5 }}
+            whileHover="hover"
+            variants={animationVariants}
+            className="bg-blue-100 dark:bg-blue-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300"
+          >
             <h2 className="text-2xl font-bold mb-2 text-blue-800 dark:text-blue-200">Web Development</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
               We build responsive and scalable web applications tailored to your business needs, ensuring optimal performance across devices.
             </p>
             <BsArrowUpRightCircle className="self-end text-blue-800 dark:text-blue-200" size={24} />
-          </a>
-          <a href="#" className="bg-green-100 dark:bg-green-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300">
+          </motion.a>
+          <motion.a
+            href="#"
+            initial="hidden"
+            animate={controls}
+            transition={{ duration: 0.5 }}
+            whileHover="hover"
+            variants={animationVariants}
+            className="bg-green-100 dark:bg-green-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300"
+          >
             <h2 className="text-2xl font-bold mb-2 text-green-800 dark:text-green-200">Digital Marketing</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
               Our digital marketing strategies are designed to enhance your online presence and engage your target audience effectively.
             </p>
             <BsArrowUpRightCircle className="self-end text-green-800 dark:text-green-200" size={24} />
-          </a>
+          </motion.a>
         </div>
 
         {/* Third Column with One Card (25% width on large screens) */}
-        <div className="w-full lg:w-1/4 flex flex-col">
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          transition={{ duration: 0.5 }}
+          whileHover="hover"
+          variants={animationVariants}
+          className="w-full lg:w-1/4 flex flex-col"
+        >
           <a href="#" className="bg-yellow-100 dark:bg-yellow-800 p-6 rounded-lg shadow-lg flex-1 flex flex-col hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-bold mb-2 text-yellow-800 dark:text-yellow-200">Mobile App Development</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4 flex-1">
@@ -53,7 +98,7 @@ const Features = () => {
             </p>
             <BsArrowUpRightCircle className="self-end text-yellow-800 dark:text-yellow-200" size={24} />
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

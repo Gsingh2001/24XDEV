@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
 import { useTheme } from '../assets/ThemeContext';
+import { motion, useAnimation } from 'framer-motion';
 
 const testimonials = [
   {
@@ -59,7 +60,7 @@ const Testimonials = () => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3, // Show 3 slides on medium screens
+          slidesToShow: 2, // Show 2 slides on medium screens
         },
       },
       {
@@ -78,7 +79,14 @@ const Testimonials = () => {
       </h2>
       <Slider {...settings} className="mx-auto">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className={`p-6 rounded-lg shadow-lg text-center ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
+          <motion.div 
+            key={index} 
+            className={`p-6 rounded-lg shadow-lg text-center ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}
+            initial={{ opacity: 0, y: 20 }} // Start off-screen and transparent
+            animate={{ opacity: 1, y: 0 }} // Animate to visible
+            exit={{ opacity: 0, y: 20 }} // Animate out
+            transition={{ duration: 0.5 }} // Animation duration
+          >
             <h3 className="text-xl font-semibold">{testimonial.name}</h3>
             <p className="text-sm">{testimonial.location}</p>
             <p className="my-4">{testimonial.feedback}</p>
@@ -86,7 +94,7 @@ const Testimonials = () => {
               {'★'.repeat(testimonial.rating)}
               {'☆'.repeat(5 - testimonial.rating)}
             </p>
-          </div>
+          </motion.div>
         ))}
       </Slider>
     </div>

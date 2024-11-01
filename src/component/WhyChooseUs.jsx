@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '../assets/ThemeContext';
+import { motion, useAnimation } from 'framer-motion';
 import {
   AiOutlineCheckCircle,
   AiOutlineStar,
@@ -74,6 +75,18 @@ const reasonsData = [
 
 const WhyChooseUs = () => {
   const { isDarkMode } = useTheme();
+  const controls = useAnimation();
+
+  // Animation variants for entry
+  const animationVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+    hover: { scale: 1.05 },
+  };
+
+  useEffect(() => {
+    controls.start("visible");
+  }, [controls]);
 
   return (
     <section id="choose-us" className={`py-8 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
@@ -88,17 +101,23 @@ const WhyChooseUs = () => {
         </div>
 
         <div className={`grid grid-cols-1 mt-2 text-center sm:mt-16 sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 xl:mt-10`}>
-          {reasonsData.map((reason) => (
-            <div 
-              key={reason.id} 
-              className={`flex flex-col justify-center items-center md:p-8 lg:p-14 border rounded-lg shadow-lg transition-transform transform hover:scale-105 
-                          ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} ${isDarkMode ? reason.darkBgColor : reason.lightBgColor}`}>
+          {reasonsData.map((reason, index) => (
+            <motion.div
+              key={reason.id}
+              initial="hidden"
+              animate={controls}
+              transition={{ duration: 0.3, delay: index * 0.1 }} // Staggered delay
+              whileHover="hover"
+              variants={animationVariants}
+              className={`flex flex-col justify-center items-center md:p-8 lg:p-14 border rounded-lg shadow-lg 
+                          ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} ${isDarkMode ? reason.darkBgColor : reason.lightBgColor}`}
+            >
               <div className={`w-16 h-16 rounded-full flex justify-center items-center ${isDarkMode ? reason.darkIconBgColor : reason.lightIconBgColor}`}>
                 {reason.icon}
               </div>
               <h3 className={`mt-12 text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{reason.title}</h3>
               <p className={`mt-5 text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{reason.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useTheme } from '../assets/ThemeContext';
+import { motion, useAnimation } from 'framer-motion';
 
 const Pricing = () => {
   const { isDarkMode } = useTheme();
+  const controls = useAnimation();
 
   return (
     <section
       id="pricing"
-      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} wow fadeInUp`}
+      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
       aria-labelledby="pricing-heading"
     >
       <div className="container mx-auto px-4">
@@ -23,49 +25,65 @@ const Pricing = () => {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pricingPlans.map((plan, index) => (
-            <PricingCard key={index} {...plan} isDarkMode={isDarkMode} />
+            <PricingCard key={index} {...plan} isDarkMode={isDarkMode} controls={controls} />
           ))}
         </div>
-
       </div>
     </section>
   );
 };
 
-const PricingCard = ({ price, period, title, features, isDarkMode }) => (
-  <div
-    className="flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
-    role="article"
-    aria-label={`${title} - ${price} per ${period}`}
-  >
-    <div className={`p-4 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
-      <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-        <span className="currency">₹</span>
-        {price}
-        <span className="period">/{period}</span>
-      </h3>
-    </div>
-    <div className={`p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
-      <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h4>
-      
-      {/* Feature List */}
-      <ul className={`list-disc list-inside mt-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-        {features.map((feature, index) => (
-          <li key={index}>{feature}</li>
-        ))}
-      </ul>
+const PricingCard = ({ price, period, title, features, isDarkMode, controls }) => {
+  // Define animation effects
+  const animationVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1 },
+  };
 
-      {/* Call to Action Button */}
-      <a
-        href="#"
-        className={`mt-4 inline-block px-4 py-2 rounded bg-blue-600 text-white text-center hover:bg-blue-500 ${isDarkMode ? 'hover:bg-blue-400' : ''}`}
-        aria-label={`Choose ${title} Plan`}
-      >
-        Choose Plan
-      </a>
-    </div>
-  </div>
-);
+  // Start animation on mount
+  React.useEffect(() => {
+    controls.start("visible");
+  }, [controls]);
+
+  return (
+    <motion.div
+      className="flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
+      role="article"
+      aria-label={`${title} - ${price} per ${period}`}
+      initial="hidden"
+      animate={controls}
+      variants={animationVariants}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
+    >
+      <div className={`p-4 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
+        <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          <span className="currency">₹</span>
+          {price}
+          <span className="period">/{period}</span>
+        </h3>
+      </div>
+      <div className={`p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+        <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h4>
+        
+        {/* Feature List */}
+        <ul className={`list-disc list-inside mt-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          {features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
+
+        {/* Call to Action Button */}
+        <a
+          href="#"
+          className={`mt-4 inline-block px-4 py-2 rounded bg-blue-600 text-white text-center hover:bg-blue-500 ${isDarkMode ? 'hover:bg-blue-400' : ''}`}
+          aria-label={`Choose ${title} Plan`}
+        >
+          Choose Plan
+        </a>
+      </div>
+    </motion.div>
+  );
+};
 
 const pricingPlans = [
   {
