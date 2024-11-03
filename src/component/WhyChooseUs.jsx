@@ -74,7 +74,7 @@ const reasonsData = [
 ];
 
 const WhyChooseUs = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode, currentTheme } = useTheme(); // Access theme context
   const controls = useAnimation();
 
   // Animation variants for entry
@@ -89,13 +89,27 @@ const WhyChooseUs = () => {
   }, [controls]);
 
   return (
-    <section id="choose-us" className={`py-8 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
+    <section
+      id="choose-us"
+      className={`py-8`}
+      style={{
+        backgroundColor: currentTheme.colors.background,
+        color: currentTheme.colors.text,
+      }}
+    >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold leading-tight sm:text-4xl xl:text-5xl">
+          <h2
+           className="text-2xl md:text-3xl font-bold mb-1" 
+           style={{ color: currentTheme.colors.primary }}
+
+           >
             Why Choose Us
           </h2>
-          <p className={`mt-4 text-base leading-7 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} sm:mt-8`}>
+          <p
+            className={`mt-1 text-base leading-7 =`}
+            style={{ color: currentTheme.colors.secondary }}
+          >
             Your trusted partner in web development solutions.
           </p>
         </div>

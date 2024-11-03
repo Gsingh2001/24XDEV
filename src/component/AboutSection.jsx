@@ -5,7 +5,7 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { useTheme } from '../assets/ThemeContext';
 
 const AboutSection = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { currentTheme, isDarkMode } = useTheme(); // Get the current theme and dark mode state
   const controls = useAnimation(); // Create animation controls
 
   // Animation variants for staggered effects
@@ -30,14 +30,12 @@ const AboutSection = () => {
     const handleScroll = () => {
       const section = document.getElementById('about-us');
       const rect = section.getBoundingClientRect();
-      // Check if the section is in the viewport
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         controls.start("visible");
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Initial check to animate if the section is already in view
     handleScroll();
 
     return () => {
@@ -48,16 +46,19 @@ const AboutSection = () => {
   return (
     <motion.section 
       id="about-us" 
-      className={`${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} py-10`}
+      className="py-10"
+      style={{
+        backgroundColor: currentTheme.colors.background,
+        color: currentTheme.colors.text,
+      }}
       aria-labelledby="about-heading"
       initial="hidden"
-      animate={controls} // Use the animation controls
+      animate={controls}
       variants={containerVariants}
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-32">
         <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
           
-          {/* Image Section with Accessible Alt Text */}
           <motion.div 
             className="w-full lg:w-5/12 md:w-1/2 mb-6 lg:mb-0 flex-shrink-0"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -72,7 +73,6 @@ const AboutSection = () => {
             />
           </motion.div>
     
-          {/* Content Section */}
           <motion.div 
             className="w-full lg:w-7/12 md:w-1/2 mt-2"
             variants={itemVariants}
@@ -82,6 +82,7 @@ const AboutSection = () => {
                 <motion.h2 
                   id="about-heading" 
                   className="text-2xl md:text-3xl font-bold mb-4"
+                  style={{ color: currentTheme.colors.primary }}
                   variants={itemVariants}
                 >
                   About 24XDEV
@@ -89,6 +90,7 @@ const AboutSection = () => {
                 
                 <motion.h3 
                   className="text-xl md:text-2xl font-semibold mb-4"
+                  style={{ color: currentTheme.colors.secondary }}
                   variants={itemVariants}
                 >
                   Your Trusted Partner in Comprehensive Web Solutions
@@ -97,6 +99,7 @@ const AboutSection = () => {
               
               <motion.p 
                 className="mb-4 text-sm md:text-base"
+                style={{ color: currentTheme.colors.text }}
                 variants={itemVariants}
               >
                 At <strong>24XDEV</strong>, our mission is to elevate your digital presence through personalized web development, design, and maintenance services. We provide a comprehensive suite of solutions tailored to your business goals, ensuring that your website not only looks stunning but also performs optimally across all devices.
@@ -104,16 +107,17 @@ const AboutSection = () => {
               
               <motion.p 
                 className="mb-4 text-sm md:text-base"
+                style={{ color: currentTheme.colors.text }}
                 variants={itemVariants}
               >
                 Our experienced team at <strong>24XDEV</strong> is committed to innovation and excellence, working to deliver top-notch results and support at every stage of your website's lifecycle. Our services include:
               </motion.p>
               
-              {/* Services List */}
               <motion.ul 
                 className="list-disc list-inside space-y-2 mb-4 text-sm md:text-base" 
                 aria-label="List of services provided by 24XDEV"
                 variants={containerVariants}
+                style={{ color: currentTheme.colors.text }}
               >
                 {[
                   { title: "Designing", description: "Crafting visually appealing and user-friendly designs that resonate with your brand and captivate your audience from the first click." },
@@ -128,14 +132,19 @@ const AboutSection = () => {
                     className="flex items-center"
                     variants={itemVariants}
                   >
-                    <AiOutlineCheckCircle size={20} color="#4CAF50" aria-hidden="true" />
+                    <AiOutlineCheckCircle size={20} color={currentTheme.colors.accent} aria-hidden="true" />
                     <span className="ml-2"><strong>{service.title}</strong>: {service.description}</span>
                   </motion.li>
                 ))}
               </motion.ul>
     
               <motion.footer variants={itemVariants}>
-                <h4 className="text-lg md:text-xl font-semibold">Let’s Build Something Great Together with 24XDEV</h4>
+                <h4 
+                  className="text-lg md:text-xl font-semibold"
+                  style={{ color: currentTheme.colors.primary }}
+                >
+                  Let’s Build Something Great Together with 24XDEV
+                </h4>
               </motion.footer>
             </article>
           </motion.div>

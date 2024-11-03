@@ -3,7 +3,7 @@ import { useTheme } from '../assets/ThemeContext'; // Import theme context
 import { motion, useAnimation } from 'framer-motion'; // Import motion and useAnimation
 
 const Portfolio = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { currentTheme } = useTheme(); // Get the current theme
   const controls = useAnimation();
 
   // Animation variants for entry
@@ -20,7 +20,8 @@ const Portfolio = () => {
   return (
     <section
       id="portfolio"
-      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+      className={`py-10 ${currentTheme.isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+      style={{ backgroundColor: currentTheme.colors.background }} // Set background color from theme
       aria-labelledby="portfolio-heading"
     >
       <div className="container mx-auto px-8">
@@ -33,7 +34,9 @@ const Portfolio = () => {
           variants={animationVariants}
           className="text-center mb-8"
         >
-          <h3 id="portfolio-heading" className="text-3xl font-bold">Our Portfolio</h3>
+          <h3 id="portfolio-heading" className="text-3xl font-bold" style={{ color: currentTheme.colors.primary }}>
+            Our Portfolio
+          </h3>
         </motion.header>
 
         {/* Portfolio Filters */}
@@ -46,6 +49,7 @@ const Portfolio = () => {
                 className={`cursor-pointer hover:text-blue-500 ${filter === 'All' ? 'filter-active' : ''}`}
                 role="tab"
                 aria-selected={filter === 'All' ? 'true' : 'false'}
+                style={{ color: currentTheme.colors.secondary }} // Use secondary color for filters
               >
                 {filter}
               </li>
@@ -79,7 +83,9 @@ const Portfolio = () => {
 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center transition-opacity duration-300 opacity-0 hover:opacity-100">
-                  <h4 id={`portfolio-item-${index}`} className="text-lg font-semibold">{item.title}</h4>
+                  <h4 id={`portfolio-item-${index}`} className="text-lg font-semibold" style={{ color: currentTheme.colors.accent }}>
+                    {item.title}
+                  </h4>
                   <p className="text-sm">{item.category}</p>
                   <div className="flex space-x-2 mt-2">
                     <a

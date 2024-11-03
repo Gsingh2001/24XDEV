@@ -4,11 +4,11 @@ import { useTheme } from '../assets/ThemeContext'; // Adjust the import accordin
 import { motion } from 'framer-motion';
 
 const IntroductionToCEO = () => {
-    const { isDarkMode } = useTheme(); // Get the dark mode state
+    const { currentTheme, isDarkMode } = useTheme(); // Get the current theme
     const ceo = {
         name: 'Gurmanpreet Singh',
         position: 'CEO and Director',
-        location: 'United Kingdom',
+        location: 'Punjab , India',
         description: `Gurmanpreet Singh is a visionary leader with a commitment to excellence and innovation. Based in the United Kingdom, he brings years of expertise and dedication to drive our company forward.`,
         imgSrc: '/img/image_1728054253661.png', // Replace with an actual image URL
     };
@@ -25,7 +25,7 @@ const IntroductionToCEO = () => {
     };
 
     return (
-        <section className={`py-16 px-4 md:px-16 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className={`py-16 px-4 md:px-16`} style={{ backgroundColor: currentTheme.colors.background }}>
             <motion.div
                 className={`flex flex-col lg:flex-row items-center justify-center mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-10 rounded-lg shadow-lg space-y-8 lg:space-y-0 lg:space-x-10`}
                 initial="hidden"

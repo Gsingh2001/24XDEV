@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from React Router
 import { motion, useAnimation } from 'framer-motion'; // Import motion and useAnimation
 
 const CallToAction = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { isDarkMode, currentTheme } = useTheme(); // Get dark mode state and theme colors
   const controls = useAnimation();
 
   // Animation variants for entry
@@ -21,12 +21,16 @@ const CallToAction = () => {
   return (
     <section
       id="call-to-action"
-      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-900'}`}
+      className={`py-10`}
+      style={{
+        backgroundColor: currentTheme.colors.background,
+        color: currentTheme.colors.text,
+      }}
       aria-labelledby="cta-heading"
     >
       <div className="container mx-auto px-8">
         <div className="flex flex-col lg:flex-row items-center">
-          
+
           {/* Text Section */}
           <motion.div
             initial="hidden"
@@ -35,10 +39,15 @@ const CallToAction = () => {
             variants={animationVariants}
             className="lg:w-9/12 text-center lg:text-left mb-6 lg:mb-0"
           >
-            <h3 id="cta-heading" className="text-3xl font-bold">
+            <h3 id="cta-heading" className="text-3xl font-bold"
+              style={{ color: currentTheme.colors.primary }}
+            >
               Transform Your Business Today
             </h3>
-            <p className="mt-4 text-lg">
+            <p className="mt-4 text-lg"
+              style={{ color: currentTheme.colors.secondary }}
+
+            >
               Ready to elevate your online presence? Whether you need a stunning website, reliable hosting, or comprehensive web solutions, we’re here to help. Our expert team provides custom web design, development, deployment, and ongoing maintenance to ensure your success. Let’s build something great together!
             </p>
           </motion.div>
@@ -53,13 +62,19 @@ const CallToAction = () => {
           >
             <Link
               to="/gettingstarted"
-              className={`inline-block ${isDarkMode ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'} text-white py-2 px-4 rounded transition duration-300`}
+              className="inline-block py-2 px-4 rounded transition duration-300"
+              style={{
+                backgroundColor: currentTheme.colors.buttonBackground,
+                color: currentTheme.colors.buttonText,
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = currentTheme.colors.buttonHover}
+              onMouseLeave={(e) => e.target.style.backgroundColor = currentTheme.colors.buttonBackground}
               aria-label="Get started with 24XDEV services"
             >
               Get Started Now
             </Link>
           </motion.div>
-          
+
         </div>
       </div>
     </section>

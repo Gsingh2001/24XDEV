@@ -5,9 +5,9 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isDarkMode, toggleDarkMode } = useTheme();
+  const { isDarkMode, toggleDarkMode, currentTheme } = useTheme();
   const menuRef = useRef(null);
-  const buttonRef = useRef(null); // New ref for button
+  const buttonRef = useRef(null);
 
   const navSections = [
     { name: 'Home', to: 'intro' },
@@ -16,7 +16,6 @@ const Navbar = () => {
     { name: 'Pricing', to: 'pricing' },
   ];
 
-  // Close menu if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -36,25 +35,35 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`${isDarkMode ? 'bg-gray-900' : 'bg-white'} pt-5 sticky top-0 z-10`}>
+    <nav
+      className={`pt-5 sticky top-0 z-10`}
+      style={{
+        backgroundColor: currentTheme.colors.background,
+        color: currentTheme.colors.text,
+      }}
+    >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
               type="button"
-              ref={buttonRef} // Assign button ref here
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              ref={buttonRef}
+              className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset"
+              style={{
+                color: currentTheme.colors.text,
+                backgroundColor: currentTheme.colors.buttonBackground,
+              }}
               aria-controls="mobile-menu"
               aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
               {!mobileMenuOpen ? (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentTheme.colors.text">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
               ) : (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke={currentTheme.colors.text}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               )}
@@ -75,7 +84,11 @@ const Navbar = () => {
                 <li key={section.to}>
                   <Link
                     to={section.to}
-                    className={`nav-link rounded shadow p-2 transition duration-300 ${isDarkMode ? 'text-white hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-200'} cursor-pointer`}
+                    className="nav-link rounded shadow p-2 transition duration-300 cursor-pointer"
+                    style={{
+                      color: currentTheme.colors.text,
+                      backgroundColor: currentTheme.colors.background,
+                    }}
                     smooth={true}
                     duration={500}
                     onClick={() => setMobileMenuOpen(false)}
@@ -113,14 +126,24 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div ref={menuRef} className={`${mobileMenuOpen ? 'block' : 'hidden'} sm:hidden`} id="mobile-menu">
-        <div className={`space-y-1 px-4 pt-4 pb-3 rounded-lg shadow-lg transition-all duration-300 ease-in-out ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+        <div
+          className="space-y-1 px-4 pt-4 pb-3 rounded-lg shadow-lg transition-all duration-300 ease-in-out"
+          style={{
+            backgroundColor: currentTheme.colors.background,
+            color: currentTheme.colors.text,
+          }}
+        >
           <ul className="flex flex-col">
             {navSections.map((section, index) => (
               <React.Fragment key={section.to}>
                 <li>
                   <Link
                     to={section.to}
-                    className={`nav-link rounded-lg p-4 transition duration-300 transform hover:scale-105 ${isDarkMode ? 'text-white hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-200'}`}
+                    className="nav-link rounded-lg p-4 transition duration-300 transform hover:scale-105"
+                    style={{
+                      color: currentTheme.colors.text,
+                      backgroundColor: currentTheme.colors.background,
+                    }}
                     smooth={true}
                     duration={500}
                     onClick={() => setMobileMenuOpen(false)}
@@ -129,14 +152,18 @@ const Navbar = () => {
                   </Link>
                 </li>
                 {index < navSections.length - 1 && (
-                  <hr className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} my-2`} />
+                  <hr className="my-2" style={{ borderColor: currentTheme.colors.border }} />
                 )}
               </React.Fragment>
             ))}
           </ul>
           <button
             onClick={toggleDarkMode}
-            className={`mt-4 w-full rounded-lg shadow-md p-3 transition duration-300 text-center ${isDarkMode ? 'text-white bg-gray-700 hover:bg-gray-600' : 'text-gray-900 bg-gray-200 hover:bg-gray-300'}`}
+            className="mt-4 w-full rounded-lg shadow-md p-3 transition duration-300 text-center"
+            style={{
+              color: currentTheme.colors.buttonText,
+              backgroundColor: currentTheme.colors.buttonBackground,
+            }}
           >
             {isDarkMode ? 'Turn on Light Mode' : 'Turn on Dark Mode'}
           </button>

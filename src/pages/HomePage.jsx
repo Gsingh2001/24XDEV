@@ -11,6 +11,7 @@ import FAQ from '../component/FAQ'
 import ContactUsModal from '../component/ContactUsModal'
 import Testimonials from '../component/Testimonials'
 import IntroductionToCEO from '../component/IntroductionToCEO'
+import OurBlogs from '../component/OurBlogs'
 
 function HomePage() {
 
@@ -25,6 +26,7 @@ function HomePage() {
             <Portfolio />
             <Pricing />
             <FAQ />
+            <OurBlogs />
             <Testimonials />
             <IntroductionToCEO /> 
         </>

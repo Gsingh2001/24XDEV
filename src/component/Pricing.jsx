@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '../assets/ThemeContext';
 import { motion, useAnimation } from 'framer-motion';
 
 const Pricing = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode, currentTheme } = useTheme();
   const controls = useAnimation();
+
+  // Define animation effects
+  const animationVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1 },
+  };
+
+  // Start animation on component mount
+  useEffect(() => {
+    controls.start("visible");
+  }, [controls]);
 
   return (
     <section
       id="pricing"
       className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+      style={{ backgroundColor: currentTheme.colors.background }} 
       aria-labelledby="pricing-heading"
     >
       <div className="container mx-auto px-4">
         
         {/* Section Header */}
         <header className="text-center mb-8">
-          <h3 id="pricing-heading" className="text-3xl font-bold">Pricing Plans</h3>
-          <p className="mt-4">
+          <h3 id="pricing-heading" className="text-3xl font-bold" style={{ color: currentTheme.colors.primary }}>Pricing Plans</h3>
+          <p className="mt-4" style={{ color: currentTheme.colors.secondary }}>
             Our flexible pricing plans are tailored to meet your needs, whether you're looking for basic web solutions or a comprehensive all-in-one package. We provide services for clients in India, the UK, and Canada.
           </p>
         </header>
@@ -41,13 +53,13 @@ const PricingCard = ({ price, period, title, features, isDarkMode, controls }) =
   };
 
   // Start animation on mount
-  React.useEffect(() => {
+  useEffect(() => {
     controls.start("visible");
   }, [controls]);
 
   return (
     <motion.div
-      className="flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
+      className={`flex flex-col rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105`}
       role="article"
       aria-label={`${title} - ${price} per ${period}`}
       initial="hidden"

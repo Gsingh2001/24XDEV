@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
 import { useTheme } from '../assets/ThemeContext';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const testimonials = [
   {
@@ -46,7 +46,7 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { currentTheme ,isDarkMode } = useTheme(); // Get the current theme
 
   const settings = {
     dots: true,
@@ -73,8 +73,8 @@ const Testimonials = () => {
   };
 
   return (
-    <div className={`p-8 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
-      <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+    <div className={`p-8`} style={{ backgroundColor: currentTheme.colors.background }}>
+      <h2 className={`text-3xl font-bold text-center mb-6`} style={{ color: currentTheme.colors.primary }}>
         What Our Clients Say
       </h2>
       <Slider {...settings} className="mx-auto">

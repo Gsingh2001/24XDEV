@@ -4,20 +4,26 @@ import { useTheme } from '../assets/ThemeContext'; // Import your theme context
 import { motion, useAnimation } from 'framer-motion'; // Import framer-motion
 
 const FAQ = () => {
-  const { isDarkMode } = useTheme(); // Get the dark mode state
+  const { currentTheme } = useTheme(); // Get the current theme
 
   return (
     <section
       id="faq"
-      className={`py-10 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+      className={`py-10`}
+      style={{ backgroundColor: currentTheme.colors.background, color: currentTheme.colors.text }}
       aria-labelledby="faq-heading"
     >
       <div className="container mx-auto px-4">
-        
         {/* FAQ Section Header */}
         <header className="text-center mb-8">
-          <h3 id="faq-heading" className="text-3xl font-bold">Frequently Asked Questions</h3>
-          <p className="mt-2">
+          <h3
+            id="faq-heading"
+            className="text-3xl font-bold"
+            style={{ color: currentTheme.colors.primary }}
+          >
+            Frequently Asked Questions
+          </h3>
+          <p className="mt-2" style={{ color: currentTheme.colors.secondary }}>
             Your questions about website design, development, hosting, deployment, and more—answered!
           </p>
         </header>
@@ -25,7 +31,7 @@ const FAQ = () => {
         {/* FAQ List */}
         <ul className="space-y-4" role="list">
           {faqItems.map((item, index) => (
-            <FAQItem key={index} {...item} isDarkMode={isDarkMode} />
+            <FAQItem key={index} {...item} currentTheme={currentTheme} />
           ))}
         </ul>
       </div>
@@ -33,7 +39,7 @@ const FAQ = () => {
   );
 };
 
-const FAQItem = ({ question, answer, isDarkMode }) => {
+const FAQItem = ({ question, answer, currentTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const controls = useAnimation(); // Animation controls for framer-motion
 
@@ -48,13 +54,15 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
 
   return (
     <li
-      className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}
+      className={`border-b`}
+      style={{ borderColor: currentTheme.colors.border }}
       role="listitem"
     >
       {/* Question */}
       <button
         onClick={toggleCollapse}
-        className={`flex justify-between items-center w-full py-3 text-left focus:outline-none ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+        className={`flex justify-between items-center w-full py-3 text-left focus:outline-none`}
+        style={{ color: currentTheme.colors.text }}
         aria-expanded={isOpen}
         aria-controls={`answer-${question}`}
       >
@@ -68,7 +76,8 @@ const FAQItem = ({ question, answer, isDarkMode }) => {
         initial={{ height: 0, opacity: 0 }}
         animate={controls}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`mt-2 rounded-lg ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'}`}
+        className={`mt-2 rounded-lg`}
+        style={{ backgroundColor: currentTheme.colors.card1.background, color: currentTheme.colors.card1.text }}
       >
         {isOpen && (
           <div className="p-4">

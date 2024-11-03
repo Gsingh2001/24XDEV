@@ -11,6 +11,8 @@ import Navbar from './component/NavBar';
 import TermsOfService from './component/TermsOfService';
 import PrivacyPolicy from './component/PrivacyPolicy';
 import AboutUsPage from './pages/AboutUsPage';
+import BlogPage from './pages/BlogPage';
+
 
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/gettingstarted" element={<GettingStarted />} />
                 <Route path="/About" element={<AboutUsPage />} />
+                <Route path="/Blogs" element={<BlogPage />} />
               </Routes>
               
               <Footer />
