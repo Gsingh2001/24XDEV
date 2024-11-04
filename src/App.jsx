@@ -13,30 +13,28 @@ import PrivacyPolicy from './component/PrivacyPolicy';
 import AboutUsPage from './pages/AboutUsPage';
 import BlogPage from './pages/BlogPage';
 
-
-
 function App() {
   const [loading, setLoading] = useState(true);
 
   // Simulate loading data
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setLoading(false); // Simulate data fetching delay
-  //   }, 1000); // Change this duration as needed
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Simulate data fetching delay
+    }, 1000); // Adjust duration as needed
 
-  //   return () => clearTimeout(timer); // Cleanup on unmount
-  // }, []);
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
 
   return (
     <UserProvider>
       <ThemeProvider>
         <Router>
-          {/* {loading ? ( // Show loader while loading
+          {loading ? ( // Show loader while loading
             <div className="loader-container fixed inset-0 flex items-center justify-center bg-white z-50">
               <Loader />
             </div>
           ) : (
-            <> */}
+            <>
               <Navbar />
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -46,10 +44,9 @@ function App() {
                 <Route path="/About" element={<AboutUsPage />} />
                 <Route path="/Blogs" element={<BlogPage />} />
               </Routes>
-              
               <Footer />
-            {/* </>
-          )} */}
+            </>
+          )}
         </Router>
       </ThemeProvider>
     </UserProvider>
